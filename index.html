@@ -5,32 +5,40 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>书信博物馆</title>
     </head>
-    <body>
-        <h1>书信博物馆</h1>
-        <div style="position: relative;">
-            <img src="resources/zhuJian.jpg" alt="书信博物馆">
-            <div style="position: absolute; top: 20%; left: 19%;">
-                <img src="resources/baiJuYi.png" alt="白居易" id="baiJuYiImg">
+    <body style="background-image: url('resources/background.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <h1><center>书信博物馆</center></h1>
+        <div>
+            <img src="resources/亲情.png" id="亲情" alt="亲情" style="position: absolute; top: 40%; left: 40%;">
+            <img src="resources/友情.png" id="友情" alt="友情" style="position: absolute; top: 40%; left: 50%;">
+            <img src="resources/爱情.png" id="爱情" alt="爱情" style="position: absolute; top: 40%; left: 60%;">
+            <img src="resources/写作指导.png" alt="写作指导" style="position: absolute; top: 60%; left: 45%;">
+        </div>
+            
+
+        <!-- 模态框 -->
+        <div id="familyModal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+            <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+                <video id="诫子书" controls width="100%" height="100%">
+                    <source src="resources/诫子书.mp4" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
             </div>
         </div>
 
-        <!-- 模态框 -->
-        <div id="baiJuYiModal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-                <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
-                    <h2>白居易</h2>
-                    <p>这里是对白居易的介绍...</p>
-                </div>
-            </div>
-
-            <script>
-                document.getElementById('baiJuYiImg').onclick = function() {
-                    document.getElementById('baiJuYiModal').style.display = 'block';
+        <script>
+            window.onclick = function(event) {
+                var familyModal = document.getElementById('familyModal');
+                if (event.target == familyModal) {
+                    familyModal.style.display = 'none';
+                    var video = document.getElementById('诫子书');
+                    video.pause();
+                    video.currentTime = 0;
                 }
-                window.onclick = function(event) {
-                    if (event.target == document.getElementById('baiJuYiModal')) {
-                        document.getElementById('baiJuYiModal').style.display = 'none';
-                    }
-                }
-            </script>
+            }
+        
+            document.getElementById('亲情').onclick = function() {
+                document.getElementById('familyModal').style.display = 'block';
+            }
+        </script>
     </body>
 </html>
