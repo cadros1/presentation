@@ -99,6 +99,7 @@
                 <div id="answers"></div>
                 <button id="nextQuestion">下一题</button>
                 <button id="confirm">确认</button>
+                <div id="result"></div>
             </div>
         </div>
 
@@ -187,6 +188,7 @@
             }
             
             document.getElementById('confirm').onclick = function() {
+                resultDiv=document.getElementById('result');
                 var userAnswers = [];
                 answers[currentQuestionIndex].answer.forEach(function(_, index) {
                     if (document.getElementById('answer' + index).checked) {
@@ -199,26 +201,21 @@
                     document.getElementsByClassName('answer')[i].style.backgroundColor = 'white';
                     if(correctAnswer.includes(i)&&userAnswers.includes(i)){
                         document.getElementsByClassName('answer')[i].style.backgroundColor = 'lightgreen';
-                    }else if(!correctAnswer.includes(i)&&!userAnswers.includes(i)){
-                        document.getElementsByClassName('answer')[i].style.backgroundColor = 'white';
-                    }
-                    else{
+                    }else if(!correctAnswer.includes(i)&&userAnswers.includes(i)){
                         document.getElementsByClassName('answer')[i].style.backgroundColor = 'lightcoral';
                     }
+                    else{
+                        document.getElementsByClassName('answer')[i].style.backgroundColor = 'white';
+                    }
                 }
-                
-                //// 获取所有答案元素
-                //var answerElements = document.getElementsByClassName('answer');
-                //for (var i = 0; i < answerElements.length; i++) {
-                //    if (userAnswers.includes(i.toString()) && answers[currentQuestionIndex].correct.includes(i.toString())) {
-                //        answerElements[i].style.backgroundColor = 'lightgreen';
-                //    }
-                //    else {
-                //        answerElements[i].style.backgroundColor = 'lightcoral';
-                //    }
-                //}
+                var result="正确答案是：";
+                for(var i=0;i<correctAnswer.length;i++){
+                    result += String.fromCharCode(65 + correctAnswer[i]) + ' ';
+                }
+                resultDiv.innerHTML=result;
             };
             document.getElementById('nextQuestion').onclick = function() {
+                resultDiv.innerHTML='';
                 currentQuestionIndex++;
                 if (currentQuestionIndex < questions.length) {
                     displayQuestionAndAnswers();
